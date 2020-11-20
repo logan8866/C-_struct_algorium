@@ -18,7 +18,7 @@ class Chain{
 		int insert(int index,ChainNode<T>* chainnode);
 		int end_insert(ChainNode<T>* chainnode);
 		int delete_any(int index);
-		int update_any(int index,T &element);
+		int update_any(int index,const T &element);
 		int show_any(int index);
 		int show_all();
 };
