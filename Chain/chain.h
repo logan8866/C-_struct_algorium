@@ -3,6 +3,7 @@ class ChainNode{
 	public:
 		T element;
 		ChainNode<T>* next;
+		~ChainNode();
 		ChainNode(const T &element);
 		ChainNode(const T &element, ChainNode<T>* next);
 		ChainNode(ChainNode<T> *chainnode);
@@ -15,6 +16,7 @@ class Chain{
 		int length;
 		Chain();
 		Chain(Chain<T>* chain);
+		~Chain();
 		int insert(int index,ChainNode<T>* chainnode);
 		int end_insert(ChainNode<T>* chainnode);
 		int delete_any(int index);

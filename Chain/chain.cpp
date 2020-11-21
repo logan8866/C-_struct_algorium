@@ -1,6 +1,31 @@
 #include <stddef.h>
+#ifndef C5
+#define C5
 #include"chain.h"
+#endif
 #include<iostream>
+
+template<class T>
+Chain<T>::~Chain(){
+	std::cout<<"release Chain start"<<std::endl;
+	ChainNode<T>* cn;
+	while(true){
+		if (this->head==NULL){
+			break;
+		}
+		cn = this->head->next;
+		delete this->head;
+		this->head = cn;
+	}
+	std::cout<<"release Chain end"<<std::endl;
+}
+
+template<class T>
+ChainNode<T>::~ChainNode(){
+	std::cout<<"delete chain"<<std::endl;
+	this->next = NULL;
+}
+
 template<class T>
 ChainNode<T>::ChainNode(const T &element){
 	this->element = element;
@@ -19,9 +44,21 @@ ChainNode<T>::ChainNode(ChainNode<T> *chainnode){
 
 template<class T>
 Chain<T>::Chain(){
-	this->head = NULL;
-	this->end = head;
 	this->length = 0;
+	T element;
+	std::cin>>element;
+	this->head = new ChainNode<T>(element);
+	this->end = this->head;
+	this->length++;
+	while(true){
+		std::cin>>element;
+		if ((int)element==48){
+			break;
+		}
+		this->end->next = new ChainNode<T>(element);
+		this->end = this->end->next;
+		this->length++;
+	}	
 }
 template<class T>
 Chain<T>::Chain(Chain<T>* chain){
@@ -57,8 +94,10 @@ template<class T>
 int Chain<T>::show_all(){
 	ChainNode<T>* cn1;
 	cn1 = this->head;
+	int i = 0;
 	for (;cn1!=NULL;cn1=cn1->next){
-		std::cout<<cn1->element<<" ";
+		std::cout<<"the "<<i<<"nd "<<"T: "<<cn1->element<<std::endl;
+		i++;
 	}
 }
 
@@ -70,6 +109,10 @@ int Chain<T>::insert(int index,ChainNode<T>* chainnode){
 		chainnode->next = this->head;
 		this->head = chainnode;
 		this->length++;
+		return 1;
+	}
+	if (index == this->length){
+		this->end_insert(chainnode);
 		return 1;
 	}
 	for (i=0;i<this->length;i++){
@@ -95,10 +138,11 @@ int Chain<T>::delete_any(int index){
 		return 1;
 	}
 	int i;
-	if (index==this->length){
+	if (index==this->length-1){
 		for (i=0;i<this->length;i++){
-                	if (i==this->length-2||index==1){
+                	if (i==this->length-2){
                         	ChainNode<T>* cn2 = this->end;
+				std::cout<<"===="<<cn2->element<<"==="<<std::endl;
                         	cn1->next = NULL;
 				this->end = cn1;
 				this->length--;
@@ -111,7 +155,7 @@ int Chain<T>::delete_any(int index){
         	}
 	}	
 	for (i=0;i<this->length;i++){
-		if (i==index-2||index==1){
+		if (i==index-1){
                 	ChainNode<T>* cn2 = cn1->next;
 			cn1->next = cn2->next;
 			this->length--;
@@ -143,7 +187,7 @@ int Chain<T>::show_any(int index){
         ChainNode<T>* cn1 = this->head;
         for (i=0;i<this->length;i++){
                 if (i==index){
-			std::cout << cn1->element;
+			std::cout << "element: "<<cn1->element<<std::endl;
                         return 1;
                 }
                 else{
