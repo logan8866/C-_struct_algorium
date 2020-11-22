@@ -52,6 +52,9 @@ int List<T>::get_length(){
 template<class T>
 T List<T>::find_by_index(int index){
 	int i;
+	if (index>this->length){
+		return -1;
+	}
 	if (index==0){
 		return this->elements[index];
 	}
@@ -69,10 +72,15 @@ int List<T>::find_by_T(T &element){
 			return i;
 		}
 	}
+	return -1;
 }
 template<class T>
 void List<T>::insert_by_index(int index,T &element){
 	int i;
+	if(index>this->length){
+		std::cout<<"error index"<<std::endl;
+		return;
+	}
 	for (i=this->length-1;i!=index-1;i--){
 		this->elements[i+1] = this->elements[i];
 	}

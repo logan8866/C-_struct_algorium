@@ -103,6 +103,9 @@ int Chain<T>::show_all(){
 
 template<class T>
 int Chain<T>::insert(int index,ChainNode<T>* chainnode){
+	if (index>this->length-1){
+		return -1;
+	}
 	int i;
 	ChainNode<T>* cn1 = this->head;
 	if (index == 0){

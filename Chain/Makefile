@@ -13,4 +13,5 @@ clear:
 	rm *.o
 	rm Run
 	rm Run5
+	rm Run_josephus
 
