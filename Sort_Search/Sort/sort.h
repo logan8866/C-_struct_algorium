@@ -31,3 +31,17 @@ class Shell_Sort:public Sort<T> {
 		int sort(T* array, int length, int time = 0);
 };
 
+template<class T>
+class Merge_Sort:public Sort<T> {
+	public:
+		int sort(T* array, int length, int time = 0);
+		int merge(T* array1,T* array2, int length1, int length2, T* target, int begin_index);
+};
+
+template<class T>
+class Count_Sort:public Sort<T> {
+	public:
+		int sort(T* array, int length, int time = 0);
+};
+
+
