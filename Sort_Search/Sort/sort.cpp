@@ -79,14 +79,14 @@ int Merge_Sort<T>::merge(T* array1, T* array2, int length1, int length2, T* targ
 	int i2 = 0;
 	int target_now_index = begin_index;
 	while(true){
-		if (i1==length1){
+		if (i1==length1||length1==0){
 			for(;i2<length2;i2++){
 				target[target_now_index] = array2[i2];
 				target_now_index++;
 			}
 			return 1;
 		}
-		if (i2==length2){
+		if (i2==length2||length2==0){
 			for(;i1<length1;i1++){
 				target[target_now_index] = array1[i1];
 				target_now_index++;
@@ -118,11 +118,133 @@ int Merge_Sort<T>::merge(T* array1, T* array2, int length1, int length2, T* targ
 template<class T>
 int Merge_Sort<T>::sort(T* array, int length, int time){
 	int abstand = 1;
-	int target[length];
+	T target[length];
 	int i = 0;
-	int *temp_target = target;
-	int *temp_array = array;
+	T* temp_target = target;
+	T* temp_array = array;
+	T* temp;
 	while(true){
-		for (i=0;i<length;i+=)
-		this->merge(
+		if (abstand>=length){
+			break;
+		}
+		for (i=0;i<length;i+=abstand*2){
+			if (length-i<=abstand){
+				this->merge(temp_array+i,temp_array,length-i,0,temp_target,i);
+			}
+			else if (length-i<2*abstand){
+				this->merge(temp_array+i,temp_array+i+abstand,abstand,length-i-abstand,temp_target,i);
+			}
+			else{
+				this->merge(temp_array+i,temp_array+i+abstand,abstand,abstand,temp_target,i);
+			}
+		}
+		abstand *=2;
+		temp = temp_array;
+		temp_array = temp_target;
+		temp_target = temp;
+	}
+	if (temp_target == target){
+		return 1;
+	}
+	if (temp_target == array){
+		for(i=0;i<length;i++){
+			array[i] = temp_target[i];
+		}
+		return 1;
+	}
+}
+
+
+template<class T>
+int Count_Sort<T>::sort(T* array, int length, T min, T max, int time){
+	/*
+	if (T!=int){
+		return -1;
+	}
+	*/
+	int abstand[max-min+1] = {0};
+	int i=0;
+	for (i=0;i<length;i++){
+		abstand[array[i]-min]++;
+	}
+	int j = 0;
+	for (i=0;i<(max-min+1);i++){
+		while(abstand[i]!=0){
+			array[j] = i+min;
+			abstand[i]--;
+			j++;
+		}
+	}
+}
+
+
+template<class T>
+int Count_Sort<T>::sort(T* array, int length, int time){}
+
+
+template<class T>
+int Radix_Sort<T>::sort(T* array, int length, int time){
+	int temp[10][length];
+	int temp_count[10] = {0};
+	int denominator = 1;
+	int i = 0;
+	/*
+	for (i=0;i<length;i++){
+		temp[array[i]%10][temp_count[array[i]%10]] = array[i];
+		temp_count[array[i]%10]++;
+	}
+	int j = 0;
+	for (i=0;i<10;i++){
+		for (;temp_count[i]!=0;temp_count[i]--){
+			array[j] = temp[i][temp_count[i]];
+		}
+	}
+	*/
+	int x;
+	int j;
+	int y = 0;
+	while(true){
+		y = 0;
+		for (i=0;i<length;i++){
+			x = (int)(array[i]%(denominator*10)/denominator);
+                	temp[x][temp_count[x]] = array[i];
+                	temp_count[x]++;
+        	}
+		if (temp_count[0] == length){
+			y = 0;
+                        for (i=0;i<10;i++){
+                                for (j=0;j<temp_count[i];j++){
+                                        array[y] = temp[i][j];
+					y++;
+                                }
+                        }
+                        return 1;
+                }
+        	for (i=0;i<10;i++){
+                	for (j=0;j<temp_count[i];j++){
+                        	array[y] = temp[i][j];
+				y++;
+                	}
+			temp_count[i] = 0;
+        	}
+		denominator *= 10;
+	}
+}
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

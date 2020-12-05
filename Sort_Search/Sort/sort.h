@@ -41,6 +41,14 @@ class Merge_Sort:public Sort<T> {
 template<class T>
 class Count_Sort:public Sort<T> {
 	public:
+		int sort(T* array, int length, T min, T max, int time = 0);
+		int sort(T* array, int length, int time = 0);
+};
+
+
+template<class T>
+class Radix_Sort:public Sort<T> {
+	public:
 		int sort(T* array, int length, int time = 0);
 };
 
