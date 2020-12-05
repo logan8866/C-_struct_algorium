@@ -1,14 +1,14 @@
 #include"find.h"
 
 template<class T>
-int Binary_Search::search(T* array, int length, T &element){
+int Binary_Search<T>::search(T* array, int length, const T &element){
 	int upper_limit = length-1;
 	int lower_limit = 0;
 	int middle_index = 0;
 	this->compare_time = 0;
 	this->begin_time = clock();
 	while(true){
-		this->compare_time++
+		this->compare_time++;
 		if ((lower_limit+upper_limit)%2==1){
 			middle_index = ((int)((lower_limit+upper_limit)/2))+1;
 		}
@@ -24,12 +24,13 @@ int Binary_Search::search(T* array, int length, T &element){
 			upper_limit = middle_index-1;
 		}
 		else{
-			lower_limit = middle_index+1
+			lower_limit = middle_index+1;
 		}
+	}
 }
 
 template<class T>
-int Order_Search::search(T* array, int length, T &element){
+int Order_Search<T>::search(T* array, int length, const T &element){
 	this->compare_time = 0;
 	int i = 0;
 	this->begin_time = clock();
@@ -45,6 +46,18 @@ int Order_Search::search(T* array, int length, T &element){
 		}
 	}
 	return -1;
+}
+
+template<class T>
+Binary_Search<T>::Binary_Search(){
+	this->compare_time = 0;
+	this->execute_time = 0;
+}
+
+template<class T>
+Order_Search<T>::Order_Search(){
+	this->compare_time = 0;
+	this->execute_time = 0;
 }
 
 
