@@ -1,18 +1,32 @@
 #include<iostream>
 #include"sort.cpp"
+#include<random>
 
 int main(){
-	int array1[1] = {2};
-	int array2[0]; 
-	int array[15] = {5,5,1,10,11,6,9,8,7,2,3,4,1,10,9};
-	Sort<int> *is;
-	is = new Radix_Sort<int>();
-	is->sort(array,15);
+	Sort<int>* is = new Insertion_Sort<int>();
+	Sort<int>* ss = new Shell_Sort<int>();
+	Sort<int>* ms = new Merge_Sort<int>();
+	Count_Sort<int>* cs = new Count_Sort<int>();
+	Sort<int>* rs = new Radix_Sort<int>();
+	std::cout<<"----------Insertion_Sort----------"<<std::endl;
+	is->run_caculate();
+	std::cout<<"----------Shell_Sort----------"<<std::endl;
+	ss->run_caculate();
+	std::cout<<"----------Merge_Sort----------"<<std::endl;
+	ms->run_caculate();
+	std::cout<<"----------Count_Sort----------"<<std::endl;
+	cs->run_caculate();
+	std::cout<<"----------Radix_Sort----------"<<std::endl;
+	rs->run_caculate();
+/*
+	Sort<int>* ms = new Merge_Sort<int>();
+	//int array[8] = {1,3,2,5,6,3,4,3};
+	int array[20] = {1,3,2,5,6,3,4,3,2,0,3,11,88,44,66,0,5,1,4,2};
+	ms->sort(array,20);
 	int i = 0;
-	int * arrayx = array;
-	for (i=0;i<15;i++){
-		std::cout<<*arrayx<<std::endl;
-		arrayx = arrayx+1;
+	for (i=0;i<20;i++){
+		std::cout<<array[i]<<std::endl;
 	}
+*/
 	return 0;
 }
