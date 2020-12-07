@@ -5,3 +5,4 @@ test:sort.cpp main.cpp sort.h
 clean:
 	rm *.o
 	rm test
+	rm *.txt

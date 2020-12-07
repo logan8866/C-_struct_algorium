@@ -1,13 +1,20 @@
-#include<iostream>
+//#include<iostream>
 #include"sort.cpp"
-#include<random>
+//#include<random>
+
 
 int main(){
-	Sort<int>* is = new Insertion_Sort<int>();
-	Sort<int>* ss = new Shell_Sort<int>();
-	Sort<int>* ms = new Merge_Sort<int>();
-	Count_Sort<int>* cs = new Count_Sort<int>();
-	Sort<int>* rs = new Radix_Sort<int>();
+	std::string sis = "is";
+	std::string sss = "ss";
+	std::string sms = "ms";
+	std::string scs = "cs";
+	std::string srs = "rs";
+
+	Sort<int>* is = new Insertion_Sort<int>(sis);
+	Sort<int>* ss = new Shell_Sort<int>(sss);
+	Sort<int>* ms = new Merge_Sort<int>(sms);
+	Count_Sort<int>* cs = new Count_Sort<int>(scs);
+	Sort<int>* rs = new Radix_Sort<int>(srs);
 	std::cout<<"----------Insertion_Sort----------"<<std::endl;
 	is->run_caculate();
 	std::cout<<"----------Shell_Sort----------"<<std::endl;
@@ -18,6 +25,8 @@ int main(){
 	cs->run_caculate();
 	std::cout<<"----------Radix_Sort----------"<<std::endl;
 	rs->run_caculate();
+
+
 /*
 	Sort<int>* ms = new Merge_Sort<int>();
 	//int array[8] = {1,3,2,5,6,3,4,3};

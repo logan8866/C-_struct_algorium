@@ -2,6 +2,7 @@
 #include<time.h>
 #include<iostream>
 #include<random>
+#include<fstream>
 
 template<class T>
 int Insertion_Sort<T>::sort(T* array, int length, int time,int time2){
@@ -271,6 +272,11 @@ int Radix_Sort<T>::sort(T* array, int length, int time,int time2){
 	}
 }
 
+template<class T>
+Sort<T>::Sort(std::string &s){
+	this->name = s;
+}
+
 
 template<class T>
 int Sort<T>::check(T* array, int length){
@@ -302,6 +308,8 @@ int Sort<T>::run_caculate(){
 	double part_execute_time = 0;
 	int part_move_time = 0;
 	int ck = 0;
+	std::fstream f;
+	f.open(this->name+".txt",std::ios::out);
 	for (i=0;i<5;i++){
 		u = new std::uniform_int_distribution<int>(0,len[i]);
 		for (x=0;x<10;x++){
@@ -325,8 +333,10 @@ int Sort<T>::run_caculate(){
 		std::cout<<i<<" st "<<"compare time: "<<this->ave_compare_time[i]<<std::endl;
                 std::cout<<i<<" st "<<"execute time: "<<this->ave_execute_time[i]<<std::endl;
                 std::cout<<i<<" st "<<"move time: "<<this->ave_move_time[i]<<std::endl;
+		f<<this->ave_compare_time[i]<<","<<this->ave_execute_time[i]<<","<<this->ave_move_time[i]<<std::endl;
 
 	}
+	f.close();
 
 }
 
@@ -348,6 +358,8 @@ int Count_Sort<T>::run_caculate(){
         double part_execute_time = 0;
         int part_move_time = 0;
         int ck = 0;
+	std::fstream f;
+        f.open(this->name+".txt",std::ios::out);
         for (i=0;i<5;i++){
                 u = new std::uniform_int_distribution<int>(0,len[i]);
                 for (x=0;x<10;x++){
@@ -371,8 +383,10 @@ int Count_Sort<T>::run_caculate(){
                 std::cout<<i<<" st "<<"compare time: "<<this->ave_compare_time[i]<<std::endl;
                 std::cout<<i<<" st "<<"execute time: "<<this->ave_execute_time[i]<<std::endl;
                 std::cout<<i<<" st "<<"move time: "<<this->ave_move_time[i]<<std::endl;
+		f<<this->ave_compare_time[i]<<","<<this->ave_execute_time[i]<<","<<this->ave_move_time[i]<<std::endl;
 
         }
+	f.close();
 }
 
 
